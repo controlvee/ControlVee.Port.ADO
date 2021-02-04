@@ -18,8 +18,8 @@ namespace ControlVee.Port.ADO
 
             Movie aMovie = context.GetMoviByID(10);
 
-            // No implemntation of params skip/take.
-            var movies = context.GetMovies(0, 100);
+            // Study implemntation of params skip/take.
+            var movies = context.GetMovies(2, 3);
         }
     }
 }
