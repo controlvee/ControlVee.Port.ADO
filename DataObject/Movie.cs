@@ -13,7 +13,7 @@ namespace DataObject
 
         public override string ToString()
         {
-            return $"Movie: {ID,-4} {Title,-25} {ReleaseDate} {Hours, -3} {Minutes, -3} {RatingID, -4}";
+            return $"Movie: {ID,-4} {Title,-25} {ReleaseDate, 25} {Hours, -3} {Minutes, -3} {RatingID, -4}";
         }
     }
 }

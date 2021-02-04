@@ -61,9 +61,29 @@ namespace DataAccess
             return rv;
         }
 
+        // No implementation of skip/take.
         public List<Movie> GetMovies(int skip, int take)
         {
             List<Movie> rv = new List<Movie>();
+
+            AssuredConnected();
+            using (System.Data.IDbCommand command = connection.CreateCommand())
+            {
+                // Demonstrate a text command.
+                // Be leary - but valid.
+                // Safe with int only.
+                string text = $"select * from movies";
+                command.CommandText = text;
+                command.CommandType = System.Data.CommandType.Text;
+
+                // Study the implementation.
+                System.Data.IDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    rv.Add(MapMovie(reader));
+                }
+            }
+            
             return rv;
         }
 

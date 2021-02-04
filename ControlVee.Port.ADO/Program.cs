@@ -16,7 +16,10 @@ namespace ControlVee.Port.ADO
 
             DataAccessObject context = new DataAccessObject(connection);
 
+            Movie aMovie = context.GetMoviByID(10);
 
+            // No implemntation of params skip/take.
+            var movies = context.GetMovies(0, 100);
         }
     }
 }
