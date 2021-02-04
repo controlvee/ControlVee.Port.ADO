@@ -41,30 +41,30 @@ namespace DataAccess
 
         public Movie MapMovie(System.Data.IDataReader reader)
         {
-            Movie rv = new Movie();
+            Movie movie = new Movie();
             // Easy but not efficient - does not check for null.
-            rv.ID = (int)reader["ID"];
-            rv.Title = (string)reader["Title"];
-            rv.ReleaseDate = (DateTime)reader["Released"];
-            rv.Minutes = (int)reader["Minutes"];
+            movie.ID = (int)reader["ID"];
+            movie.Title = (string)reader["Title"];
+            movie.ReleaseDate = (DateTime)reader["Released"];
+            movie.Minutes = (int)reader["Minutes"];
 
             // Proper implentation at next line.
             if (reader.IsDBNull(5))
             {
-                rv.RatingID = null; 
+                movie.RatingID = null; 
             }
             else
             {
-                rv.RatingID = (int)reader["RatingID"];
+                movie.RatingID = (int)reader["RatingID"];
             }
             
-            return rv;
+            return movie;
         }
 
         // No implementation of skip/take.
         public List<Movie> GetMovies(int skip, int take)
         {
-            List<Movie> rv = new List<Movie>();
+            List<Movie> movie = new List<Movie>();
 
             AssuredConnected();
             using (System.Data.IDbCommand command = connection.CreateCommand())
@@ -80,11 +80,11 @@ namespace DataAccess
                 System.Data.IDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    rv.Add(MapMovie(reader));
+                    movie.Add(MapMovie(reader));
                 }
             }
             
-            return rv;
+            return movie;
         }
 
         public Movie GetMoviByID(int id)
