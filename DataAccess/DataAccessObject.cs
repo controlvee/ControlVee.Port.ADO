@@ -45,10 +45,19 @@ namespace DataAccess
             // Easy but not efficient - does not check for null.
             rv.ID = (int)reader["ID"];
             rv.Title = (string)reader["Title"];
-            rv.ReleaseDate = (DateTime)reader["ReleaseDate"];
+            rv.ReleaseDate = (DateTime)reader["Released"];
             rv.Minutes = (int)reader["Minutes"];
-            rv.RatingID = (int)reader["RatingID"];
 
+            // Proper implentation at next line.
+            if (reader.IsDBNull(5))
+            {
+                rv.RatingID = null; 
+            }
+            else
+            {
+                rv.RatingID = (int)reader["RatingID"];
+            }
+            
             return rv;
         }
 
